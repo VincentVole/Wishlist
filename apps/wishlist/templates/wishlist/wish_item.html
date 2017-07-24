@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wish Item</title>
+</head>
+<body>
+	<a href="/dashboard">Home</a><a href="/logout">Logout</a>
+	<h1>{{ item.name }}</h1>
+	<p>Users who added this product/item under their wish list:</p>
+	<ul>
+		{% for user in users%}
+		{% if user%}
+		<li style="list-style-type: none;">{{ user.name }}</li>
+		{% endif %}
+		{% endfor %}
+	</ul>
+</body>
+</html>

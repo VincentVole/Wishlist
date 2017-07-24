@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Login and Registration</title>
+	{% load static %}
+    <!-- Bootstrap -->
+    <link href="{% static 'quotes/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div>
+		<h1>Welcome!</h1>
+		<form action="/add" method="post">
+			{% csrf_token %}
+			<fieldset>
+				<legend>Register</legend>
+				<label for="name">Name: </label>
+				<input type="text" name="name" id="name">
+				<label for="username">Username: </label>
+				<input type="text" name="username" id="username">
+				<label for="password">Password: </label>
+				<input type="password" name="password" id="password">
+				<label>*Password should be at least 8 characters</label>
+				<label for="pass_confirm">Confirm pw: </label>
+				<input type="password" name="pass_confirm" id="pass_confirm">
+				<label for="hired">Date hired: </label>
+				<input type="date" name="hired" id="hired">
+				<button>Register</button>
+			</fieldset>
+		</form>
+		<ul>
+		{% for message in messages %}
+		{% if message and message.tags != 'login error' %}
+
+		<li>{{ message }}</li>
+
+		{% endif %}
+		{% endfor %}
+		</ul>
+		<form action="/login" method="post">
+			{% csrf_token %}
+			<fieldset>
+				<legend>Login</legend>
+				<label for="username">Username</label>
+				<input type="text" name="username" id="username">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password">
+				<button>Login</button>
+			</fieldset>
+		</form>
+		<ul>
+		{% for message in messages %}
+		{% if message and message.tags == 'login error'%}
+
+		<li>{{ message }}</li>
+
+		{% endif %}
+		{% endfor %}
+		</ul>
+	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'quotes/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
